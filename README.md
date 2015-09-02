@@ -22,3 +22,4 @@ The algorithm implemented here accounts for the physical process of particles ad
 initial velocity](http://arxiv.org/abs/1502.02818). _ArXiv e-prints arXiv:1502.02818_. submitted.
 + E. Afik. [Robust and highly performant ring detection algorithm for 3d particle tracking using 2d microscope imaging](http://www.nature.com/articles/srep13584). Sci. Rep. 5, 13584; doi: 10.1038/srep13584 (2015)
 + [ridge-directed-ring-detector](https://github.com/eldad-a/ridge-directed-ring-detector) -- a Cython implementation of the ring detection algorithm for 3d particle tracking
++ [natural-cubic-smoothing-splines](https://github.com/eldad-a/natural-cubic-smoothing-splines)
