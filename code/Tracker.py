@@ -326,6 +326,18 @@ class Tracker():
 
 
 ################# experimental
+'''
+DISCLAIMER:
+This part should be regarded as incomplete and highly experimental.
+It is provided ONLY in order  to help others who may like to implement the algorithms described in
+
+N. T. Ouellette, H. Xu, and E. Bodenschatz, 
+A quantitative study of three-dimensional Lagrangian particle tracking algorithms,
+Exp. Fluids 40, 301-313 (2006).
+
+My personal experience shows that the output based on this approach is not as good as the ones by the main one.
+Use with care!
+'''
 
     def two_frames_linking(self):
         """
