@@ -21,3 +21,4 @@ The algorithm implemented here accounts for the physical process of particles ad
 + E. Afik and V. Steinberg. [Pair dispersion in a chaotic flow reveals the role of the memory of
 initial velocity](http://arxiv.org/abs/1502.02818). _ArXiv e-prints arXiv:1502.02818_. submitted.
 + E. Afik. [Robust and highly performant ring detection algorithm for 3d particle tracking using 2d microscope imaging](http://www.nature.com/articles/srep13584). Sci. Rep. 5, 13584; doi: 10.1038/srep13584 (2015)
++ [ridge-directed-ring-detector](https://github.com/eldad-a/ridge-directed-ring-detector)
