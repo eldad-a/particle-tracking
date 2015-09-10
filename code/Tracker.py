@@ -2,6 +2,7 @@
 
 ################################################################################
 #  filename: Tracker.py
+#  first appeared online: https://github.com/eldad-a/particle-tracking
 #  
 #  Copyright (c) 2014, Eldad Afik
 #  All rights reserved.
