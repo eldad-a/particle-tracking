@@ -1,7 +1,7 @@
 #! python
 
 ################################################################################
-#  filename: Tracker.py
+#  filename: tracker.py (originally "Tracker.py")
 #  first appeared online: https://github.com/eldad-a/particle-tracking
 #  
 #  Copyright (c) 2014, Eldad Afik
@@ -34,6 +34,13 @@
 #  
 ################################################################################
 
+from __future__ import print_function # Python 2 and 3
+## dependency: conda install future
+from past.builtins import xrange # Python 2 and 3: backward-compatible 
+from future.utils import iteritems # Python 2 and 3
+
+
+
 import pandas as pd
 import numpy as np
 from scipy.spatial.distance import cdist
@@ -42,6 +49,8 @@ from scipy.spatial.distance import cdist
 #   * Need to verify that ghosts are handled correctly, namely - as future
 #   prediction does not account for time difference, this is expected to result
 #   in over-estimation of dX!
+
+__all__ = ['Tracker']
 
 class Tracker():
     
@@ -85,18 +94,18 @@ class Tracker():
             self.x = 0
             self.v = 0
             self.a = 0 
-            print 'Time col is the index named %s' % self.time_col
-            print '%d position columns were found, named: \n %s'\
-                    % (self.Ndim, self.pos_cols)
+            print('Time col is the index named {}'.format(self.time_col))
+            print('{} position columns were found, named: \n {}'.\
+                                      format(self.Ndim, self.pos_cols) )
 
     def user_update(self, matched, links):
-        print '\nProcessed frame %d / %d ' % (self.frame_indx+1, self.timestamps.size)
-        print '    Number of particles found:  %7d' % len(matched)
-        print '    Number of active tracks:  %7d' % len(self.active_tracks)
-        print '    Number of tracks with ghosts:  %7d' % len(self.ghost_tracks.keys())
-        print '    Number of new tracks:  %7d' % np.sum(matched==0)
-        print '    Number of terminated tracks:  %7d' % np.sum(links==-1)
-        print '    Total number of tracks:  %7d' % len(self.tracks)
+        print('\nProcessed frame %d / %d ' % (self.frame_indx+1, self.timestamps.size))
+        print( '    Number of particles found:  %7d' % len(matched))
+        print( '    Number of active tracks:  %7d' % len(self.active_tracks))
+        print( '    Number of tracks with ghosts:  %7d' % len(self.ghost_tracks.keys()))
+        print( '    Number of new tracks:  %7d' % np.sum(matched==0))
+        print( '    Number of terminated tracks:  %7d' % np.sum(links==-1))
+        print( '    Total number of tracks:  %7d' % len(self.tracks))
     
     def update_tracks(self, links, frame):
         """
@@ -305,7 +314,7 @@ class Tracker():
         
         # delete remaining ghosts from tracks:
         if self.cleanup:
-            for track_indx, Nghosts in self.ghost_tracks.iteritems():
+            for track_indx, Nghosts in iteritems(self.ghost_tracks):
                 del self.tracks[track_indx][-Nghosts:]
                 #del self.ghost_tracks[track_indx]             
             
@@ -327,7 +336,7 @@ class Tracker():
         ## get grouped indices frames:
         ts_indices = self.positions.groupby(level=self.time_col).indices
         ## for better performance, in updating avoid the DataFrame indexing.
-        # (do this buy getting a view of the `traj_id` column and update by
+        # (do this by getting a view of the `traj_id` column and update by
         # numpy indexing)
         try:
             traj_ids = self.positions['traj_id'].values
@@ -337,7 +346,7 @@ class Tracker():
             self.positions['traj_id'] = unlinked_id
             traj_ids = self.positions['traj_id'].values
             if self.verbose:
-                print 'Initialised as "traj_id" column to %s' % unlinked_id
+                print( 'Initialised as "traj_id" column to %s' % unlinked_id)
         ## update table:
         for track in self.tracks:
             if len(track)<min_length: continue # skip short tracks 
@@ -357,6 +366,6 @@ class Tracker():
                                             )
         self.summary = summary
         if self.verbose:
-            print "Found %d tracks longer than %d." %\
-                                                (len(summary),min_length)
+            print("Found %d tracks longer than %d." %\
+                                                (len(summary),min_length))
 
